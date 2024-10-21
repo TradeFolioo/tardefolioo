@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:tradefolioo/config/color_constants.dart';
 import 'package:tradefolioo/services/app_routes.dart';
 
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -25,11 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _navigateToLogin() async {
-    await Future.delayed(const Duration(milliseconds: 3000), () {});
-    Get.offNamed(AppRoutes.loginScreen);
+    await Future.delayed(const Duration(milliseconds: 1000), () {});
+    Get.offNamed(AppRoutes.registerScreen);
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +37,6 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-         
             const Text(
               'TradeFolioo',
               style: TextStyle(

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:tradefolioo/view/screens/AuthScreen/login_screen.dart';
 import 'package:tradefolioo/view/screens/AuthScreen/register_screen.dart';
+import 'package:tradefolioo/view/screens/HomeNavigationScreen/home_navigation_screen.dart';
 import 'package:tradefolioo/view/screens/SplashScreen/splash_screen.dart';
-
 
 class AppRoutes {
   static const String loginScreen = '/login';
@@ -24,13 +24,11 @@ class AppRoutes {
   static const String creatStoryScreen = '/creatStoryScreen';
   static const String viewStoryScreen = '/viewStoryScreen';
 
-  
-
   static final List<GetPage> routes = [
-
     GetPage(name: loginScreen, page: () => LoginScreen()),
     GetPage(name: registerScreen, page: () => RegisterScreen()),
     GetPage(name: splashScreen, page: () => const SplashScreen()),
-    
+    GetPage(
+        name: homeNavigationScreen, page: () => const HomeNavigationScreen())
   ];
 }
