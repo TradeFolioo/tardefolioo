@@ -11,7 +11,7 @@ class AuthResponses {
     }
   }
 
-  Future<ResponseData> login(Map<String, dynamic> data) async {
+  static Future<ResponseData> login(Map<String, dynamic> data) async {
     try {
       final response = await ApiServices.post(ApiServices.login, data);
       return response;

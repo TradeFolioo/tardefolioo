@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _navigateToLogin() async {
     await Future.delayed(const Duration(milliseconds: 1000), () {});
-    Get.offNamed(AppRoutes.registerScreen);
+    Get.offNamed(AppRoutes.loginScreen);
   }
 
   @override
