@@ -68,31 +68,41 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Password cannot be empty';
-                    }
-                    if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
-                    }
-                    return null;
-                  },
-                  obscureText: true,
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    fillColor: ColorConstants.primaryTextBoxColor,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none),
-                    filled: true,
-                    labelText: 'Password',
-                    labelStyle: GoogleFonts.inter(
-                      color: ColorConstants.primaryBlackColor,
-                      fontSize: 14,
+                Consumer<AuthController>(builder: (context, controller, child) {
+                  return TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Password cannot be empty';
+                      }
+                      return null;
+                    },
+                    controller: _passwordController,
+                    obscureText: controller.showLoginPassword ? false : true,
+                    decoration: InputDecoration(
+                      fillColor: ColorConstants.primaryTextBoxColor,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none),
+                      filled: true,
+                      labelText: 'Password',
+                      labelStyle: GoogleFonts.inter(
+                        color: ColorConstants.primaryBlackColor,
+                        fontSize: 14,
+                      ),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          controller.toggleShowLoginPassword();
+                        },
+                        icon: Icon(
+                          controller.showLoginPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: ColorConstants.primaryBlackColor,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                }),
                 const SizedBox(height: 25),
                 Consumer<AuthController>(
                   builder: (context, controller, child) {

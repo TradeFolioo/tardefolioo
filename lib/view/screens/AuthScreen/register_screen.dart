@@ -89,54 +89,82 @@ class RegisterScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Password cannot be empty';
-                    }
-                    if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
-                    }
-                    return null;
+                Consumer<AuthController>(
+                  builder: (context, controller, child) {
+                    return TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Password cannot be empty';
+                        }
+                        if (value.length < 6) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
+                      obscureText: controller.showPassword ? false : true,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            controller.toggleShowPassword();
+                          },
+                          icon: Icon(
+                            controller.showPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: ColorConstants.primaryBlackColor,
+                          ),
+                        ),
+                        fillColor: ColorConstants.primaryTextBoxColor,
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none),
+                        filled: true,
+                        labelText: 'Password',
+                        labelStyle: GoogleFonts.inter(
+                          color: ColorConstants.primaryBlackColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                    );
                   },
-                  obscureText: true,
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    fillColor: ColorConstants.primaryTextBoxColor,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none),
-                    filled: true,
-                    labelText: 'Password',
-                    labelStyle: GoogleFonts.inter(
-                      color: ColorConstants.primaryBlackColor,
-                      fontSize: 14,
-                    ),
-                  ),
                 ),
                 const SizedBox(height: 16),
-                TextFormField(
-                  obscureText: true,
-                  validator: (value) {
-                    if (value != _passwordController.text) {
-                      return 'Passwords do not match';
-                    }
-                    return null;
-                  },
-                  controller: _confirmPasswordController,
-                  decoration: InputDecoration(
-                    fillColor: ColorConstants.primaryTextBoxColor,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide.none),
-                    filled: true,
-                    labelText: 'Confirm Password',
-                    labelStyle: GoogleFonts.inter(
-                      color: ColorConstants.primaryBlackColor,
-                      fontSize: 14,
+                Consumer<AuthController>(builder: (context, controller, child) {
+                  return TextFormField(
+                    obscureText: controller.showConfirmPassword ? false : true,
+                    validator: (value) {
+                      if (value != _passwordController.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
+                    controller: _confirmPasswordController,
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          controller.toggleShowConfirmPassword();
+                        },
+                        icon: Icon(
+                          controller.showConfirmPassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: ColorConstants.primaryBlackColor,
+                        ),
+                      ),
+                      fillColor: ColorConstants.primaryTextBoxColor,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none),
+                      filled: true,
+                      labelText: 'Confirm Password',
+                      labelStyle: GoogleFonts.inter(
+                        color: ColorConstants.primaryBlackColor,
+                        fontSize: 14,
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                }),
                 const SizedBox(height: 25),
                 Consumer<AuthController>(
                   builder: (context, controller, child) {
